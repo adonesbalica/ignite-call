@@ -5,5 +5,5 @@ export default function Home() {
     <div>
       <Heading as="h1">Hello World</Heading>
     </div>
-  );
+  )
 }
