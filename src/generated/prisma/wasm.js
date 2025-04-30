@@ -145,6 +145,14 @@ exports.Prisma.SessionScalarFieldEnum = {
   expires: 'expires'
 };
 
+exports.Prisma.UserTimeIntervalScalarFieldEnum = {
+  id: 'id',
+  week_day: 'week_day',
+  time_start_in_minutes: 'time_start_in_minutes',
+  time_end_in_minutes: 'time_end_in_minutes',
+  user_id: 'user_id'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -159,7 +167,8 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   User: 'User',
   Account: 'Account',
-  Session: 'Session'
+  Session: 'Session',
+  UserTimeInterval: 'UserTimeInterval'
 };
 
 /**

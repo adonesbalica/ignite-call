@@ -28,6 +28,11 @@ export type Account = $Result.DefaultSelection<Prisma.$AccountPayload>
  * 
  */
 export type Session = $Result.DefaultSelection<Prisma.$SessionPayload>
+/**
+ * Model UserTimeInterval
+ * 
+ */
+export type UserTimeInterval = $Result.DefaultSelection<Prisma.$UserTimeIntervalPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -183,6 +188,16 @@ export class PrismaClient<
     * ```
     */
   get session(): Prisma.SessionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userTimeInterval`: Exposes CRUD operations for the **UserTimeInterval** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserTimeIntervals
+    * const userTimeIntervals = await prisma.userTimeInterval.findMany()
+    * ```
+    */
+  get userTimeInterval(): Prisma.UserTimeIntervalDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -625,7 +640,8 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Account: 'Account',
-    Session: 'Session'
+    Session: 'Session',
+    UserTimeInterval: 'UserTimeInterval'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -644,7 +660,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "session"
+      modelProps: "user" | "account" | "session" | "userTimeInterval"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -870,6 +886,80 @@ export namespace Prisma {
           }
         }
       }
+      UserTimeInterval: {
+        payload: Prisma.$UserTimeIntervalPayload<ExtArgs>
+        fields: Prisma.UserTimeIntervalFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserTimeIntervalFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTimeIntervalPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserTimeIntervalFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTimeIntervalPayload>
+          }
+          findFirst: {
+            args: Prisma.UserTimeIntervalFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTimeIntervalPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserTimeIntervalFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTimeIntervalPayload>
+          }
+          findMany: {
+            args: Prisma.UserTimeIntervalFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTimeIntervalPayload>[]
+          }
+          create: {
+            args: Prisma.UserTimeIntervalCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTimeIntervalPayload>
+          }
+          createMany: {
+            args: Prisma.UserTimeIntervalCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserTimeIntervalCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTimeIntervalPayload>[]
+          }
+          delete: {
+            args: Prisma.UserTimeIntervalDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTimeIntervalPayload>
+          }
+          update: {
+            args: Prisma.UserTimeIntervalUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTimeIntervalPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserTimeIntervalDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserTimeIntervalUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserTimeIntervalUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTimeIntervalPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserTimeIntervalUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTimeIntervalPayload>
+          }
+          aggregate: {
+            args: Prisma.UserTimeIntervalAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserTimeInterval>
+          }
+          groupBy: {
+            args: Prisma.UserTimeIntervalGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserTimeIntervalGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserTimeIntervalCountArgs<ExtArgs>
+            result: $Utils.Optional<UserTimeIntervalCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -957,6 +1047,7 @@ export namespace Prisma {
     user?: UserOmit
     account?: AccountOmit
     session?: SessionOmit
+    userTimeInterval?: UserTimeIntervalOmit
   }
 
   /* Types for Logging */
@@ -1053,11 +1144,13 @@ export namespace Prisma {
   export type UserCountOutputType = {
     account: number
     session: number
+    timeIntervals: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     account?: boolean | UserCountOutputTypeCountAccountArgs
     session?: boolean | UserCountOutputTypeCountSessionArgs
+    timeIntervals?: boolean | UserCountOutputTypeCountTimeIntervalsArgs
   }
 
   // Custom InputTypes
@@ -1083,6 +1176,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountSessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SessionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountTimeIntervalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserTimeIntervalWhereInput
   }
 
 
@@ -1264,6 +1364,7 @@ export namespace Prisma {
     created_at?: boolean
     account?: boolean | User$accountArgs<ExtArgs>
     session?: boolean | User$sessionArgs<ExtArgs>
+    timeIntervals?: boolean | User$timeIntervalsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1298,6 +1399,7 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     account?: boolean | User$accountArgs<ExtArgs>
     session?: boolean | User$sessionArgs<ExtArgs>
+    timeIntervals?: boolean | User$timeIntervalsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1308,6 +1410,7 @@ export namespace Prisma {
     objects: {
       account: Prisma.$AccountPayload<ExtArgs>[]
       session: Prisma.$SessionPayload<ExtArgs>[]
+      timeIntervals: Prisma.$UserTimeIntervalPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1712,6 +1815,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     account<T extends User$accountArgs<ExtArgs> = {}>(args?: Subset<T, User$accountArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     session<T extends User$sessionArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    timeIntervals<T extends User$timeIntervalsArgs<ExtArgs> = {}>(args?: Subset<T, User$timeIntervalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserTimeIntervalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2178,6 +2282,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
+  }
+
+  /**
+   * User.timeIntervals
+   */
+  export type User$timeIntervalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTimeInterval
+     */
+    select?: UserTimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTimeInterval
+     */
+    omit?: UserTimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTimeIntervalInclude<ExtArgs> | null
+    where?: UserTimeIntervalWhereInput
+    orderBy?: UserTimeIntervalOrderByWithRelationInput | UserTimeIntervalOrderByWithRelationInput[]
+    cursor?: UserTimeIntervalWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserTimeIntervalScalarFieldEnum | UserTimeIntervalScalarFieldEnum[]
   }
 
   /**
@@ -4424,6 +4552,1104 @@ export namespace Prisma {
 
 
   /**
+   * Model UserTimeInterval
+   */
+
+  export type AggregateUserTimeInterval = {
+    _count: UserTimeIntervalCountAggregateOutputType | null
+    _avg: UserTimeIntervalAvgAggregateOutputType | null
+    _sum: UserTimeIntervalSumAggregateOutputType | null
+    _min: UserTimeIntervalMinAggregateOutputType | null
+    _max: UserTimeIntervalMaxAggregateOutputType | null
+  }
+
+  export type UserTimeIntervalAvgAggregateOutputType = {
+    week_day: number | null
+    time_start_in_minutes: number | null
+    time_end_in_minutes: number | null
+  }
+
+  export type UserTimeIntervalSumAggregateOutputType = {
+    week_day: number | null
+    time_start_in_minutes: number | null
+    time_end_in_minutes: number | null
+  }
+
+  export type UserTimeIntervalMinAggregateOutputType = {
+    id: string | null
+    week_day: number | null
+    time_start_in_minutes: number | null
+    time_end_in_minutes: number | null
+    user_id: string | null
+  }
+
+  export type UserTimeIntervalMaxAggregateOutputType = {
+    id: string | null
+    week_day: number | null
+    time_start_in_minutes: number | null
+    time_end_in_minutes: number | null
+    user_id: string | null
+  }
+
+  export type UserTimeIntervalCountAggregateOutputType = {
+    id: number
+    week_day: number
+    time_start_in_minutes: number
+    time_end_in_minutes: number
+    user_id: number
+    _all: number
+  }
+
+
+  export type UserTimeIntervalAvgAggregateInputType = {
+    week_day?: true
+    time_start_in_minutes?: true
+    time_end_in_minutes?: true
+  }
+
+  export type UserTimeIntervalSumAggregateInputType = {
+    week_day?: true
+    time_start_in_minutes?: true
+    time_end_in_minutes?: true
+  }
+
+  export type UserTimeIntervalMinAggregateInputType = {
+    id?: true
+    week_day?: true
+    time_start_in_minutes?: true
+    time_end_in_minutes?: true
+    user_id?: true
+  }
+
+  export type UserTimeIntervalMaxAggregateInputType = {
+    id?: true
+    week_day?: true
+    time_start_in_minutes?: true
+    time_end_in_minutes?: true
+    user_id?: true
+  }
+
+  export type UserTimeIntervalCountAggregateInputType = {
+    id?: true
+    week_day?: true
+    time_start_in_minutes?: true
+    time_end_in_minutes?: true
+    user_id?: true
+    _all?: true
+  }
+
+  export type UserTimeIntervalAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserTimeInterval to aggregate.
+     */
+    where?: UserTimeIntervalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserTimeIntervals to fetch.
+     */
+    orderBy?: UserTimeIntervalOrderByWithRelationInput | UserTimeIntervalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserTimeIntervalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserTimeIntervals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserTimeIntervals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserTimeIntervals
+    **/
+    _count?: true | UserTimeIntervalCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserTimeIntervalAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserTimeIntervalSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserTimeIntervalMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserTimeIntervalMaxAggregateInputType
+  }
+
+  export type GetUserTimeIntervalAggregateType<T extends UserTimeIntervalAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserTimeInterval]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserTimeInterval[P]>
+      : GetScalarType<T[P], AggregateUserTimeInterval[P]>
+  }
+
+
+
+
+  export type UserTimeIntervalGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserTimeIntervalWhereInput
+    orderBy?: UserTimeIntervalOrderByWithAggregationInput | UserTimeIntervalOrderByWithAggregationInput[]
+    by: UserTimeIntervalScalarFieldEnum[] | UserTimeIntervalScalarFieldEnum
+    having?: UserTimeIntervalScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserTimeIntervalCountAggregateInputType | true
+    _avg?: UserTimeIntervalAvgAggregateInputType
+    _sum?: UserTimeIntervalSumAggregateInputType
+    _min?: UserTimeIntervalMinAggregateInputType
+    _max?: UserTimeIntervalMaxAggregateInputType
+  }
+
+  export type UserTimeIntervalGroupByOutputType = {
+    id: string
+    week_day: number
+    time_start_in_minutes: number
+    time_end_in_minutes: number
+    user_id: string
+    _count: UserTimeIntervalCountAggregateOutputType | null
+    _avg: UserTimeIntervalAvgAggregateOutputType | null
+    _sum: UserTimeIntervalSumAggregateOutputType | null
+    _min: UserTimeIntervalMinAggregateOutputType | null
+    _max: UserTimeIntervalMaxAggregateOutputType | null
+  }
+
+  type GetUserTimeIntervalGroupByPayload<T extends UserTimeIntervalGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserTimeIntervalGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserTimeIntervalGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserTimeIntervalGroupByOutputType[P]>
+            : GetScalarType<T[P], UserTimeIntervalGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserTimeIntervalSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    week_day?: boolean
+    time_start_in_minutes?: boolean
+    time_end_in_minutes?: boolean
+    user_id?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userTimeInterval"]>
+
+  export type UserTimeIntervalSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    week_day?: boolean
+    time_start_in_minutes?: boolean
+    time_end_in_minutes?: boolean
+    user_id?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userTimeInterval"]>
+
+  export type UserTimeIntervalSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    week_day?: boolean
+    time_start_in_minutes?: boolean
+    time_end_in_minutes?: boolean
+    user_id?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userTimeInterval"]>
+
+  export type UserTimeIntervalSelectScalar = {
+    id?: boolean
+    week_day?: boolean
+    time_start_in_minutes?: boolean
+    time_end_in_minutes?: boolean
+    user_id?: boolean
+  }
+
+  export type UserTimeIntervalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "week_day" | "time_start_in_minutes" | "time_end_in_minutes" | "user_id", ExtArgs["result"]["userTimeInterval"]>
+  export type UserTimeIntervalInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserTimeIntervalIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserTimeIntervalIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $UserTimeIntervalPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserTimeInterval"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      week_day: number
+      time_start_in_minutes: number
+      time_end_in_minutes: number
+      user_id: string
+    }, ExtArgs["result"]["userTimeInterval"]>
+    composites: {}
+  }
+
+  type UserTimeIntervalGetPayload<S extends boolean | null | undefined | UserTimeIntervalDefaultArgs> = $Result.GetResult<Prisma.$UserTimeIntervalPayload, S>
+
+  type UserTimeIntervalCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserTimeIntervalFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserTimeIntervalCountAggregateInputType | true
+    }
+
+  export interface UserTimeIntervalDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserTimeInterval'], meta: { name: 'UserTimeInterval' } }
+    /**
+     * Find zero or one UserTimeInterval that matches the filter.
+     * @param {UserTimeIntervalFindUniqueArgs} args - Arguments to find a UserTimeInterval
+     * @example
+     * // Get one UserTimeInterval
+     * const userTimeInterval = await prisma.userTimeInterval.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserTimeIntervalFindUniqueArgs>(args: SelectSubset<T, UserTimeIntervalFindUniqueArgs<ExtArgs>>): Prisma__UserTimeIntervalClient<$Result.GetResult<Prisma.$UserTimeIntervalPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserTimeInterval that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserTimeIntervalFindUniqueOrThrowArgs} args - Arguments to find a UserTimeInterval
+     * @example
+     * // Get one UserTimeInterval
+     * const userTimeInterval = await prisma.userTimeInterval.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserTimeIntervalFindUniqueOrThrowArgs>(args: SelectSubset<T, UserTimeIntervalFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserTimeIntervalClient<$Result.GetResult<Prisma.$UserTimeIntervalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserTimeInterval that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserTimeIntervalFindFirstArgs} args - Arguments to find a UserTimeInterval
+     * @example
+     * // Get one UserTimeInterval
+     * const userTimeInterval = await prisma.userTimeInterval.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserTimeIntervalFindFirstArgs>(args?: SelectSubset<T, UserTimeIntervalFindFirstArgs<ExtArgs>>): Prisma__UserTimeIntervalClient<$Result.GetResult<Prisma.$UserTimeIntervalPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserTimeInterval that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserTimeIntervalFindFirstOrThrowArgs} args - Arguments to find a UserTimeInterval
+     * @example
+     * // Get one UserTimeInterval
+     * const userTimeInterval = await prisma.userTimeInterval.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserTimeIntervalFindFirstOrThrowArgs>(args?: SelectSubset<T, UserTimeIntervalFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserTimeIntervalClient<$Result.GetResult<Prisma.$UserTimeIntervalPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserTimeIntervals that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserTimeIntervalFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserTimeIntervals
+     * const userTimeIntervals = await prisma.userTimeInterval.findMany()
+     * 
+     * // Get first 10 UserTimeIntervals
+     * const userTimeIntervals = await prisma.userTimeInterval.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userTimeIntervalWithIdOnly = await prisma.userTimeInterval.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserTimeIntervalFindManyArgs>(args?: SelectSubset<T, UserTimeIntervalFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserTimeIntervalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserTimeInterval.
+     * @param {UserTimeIntervalCreateArgs} args - Arguments to create a UserTimeInterval.
+     * @example
+     * // Create one UserTimeInterval
+     * const UserTimeInterval = await prisma.userTimeInterval.create({
+     *   data: {
+     *     // ... data to create a UserTimeInterval
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserTimeIntervalCreateArgs>(args: SelectSubset<T, UserTimeIntervalCreateArgs<ExtArgs>>): Prisma__UserTimeIntervalClient<$Result.GetResult<Prisma.$UserTimeIntervalPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserTimeIntervals.
+     * @param {UserTimeIntervalCreateManyArgs} args - Arguments to create many UserTimeIntervals.
+     * @example
+     * // Create many UserTimeIntervals
+     * const userTimeInterval = await prisma.userTimeInterval.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserTimeIntervalCreateManyArgs>(args?: SelectSubset<T, UserTimeIntervalCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserTimeIntervals and returns the data saved in the database.
+     * @param {UserTimeIntervalCreateManyAndReturnArgs} args - Arguments to create many UserTimeIntervals.
+     * @example
+     * // Create many UserTimeIntervals
+     * const userTimeInterval = await prisma.userTimeInterval.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserTimeIntervals and only return the `id`
+     * const userTimeIntervalWithIdOnly = await prisma.userTimeInterval.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserTimeIntervalCreateManyAndReturnArgs>(args?: SelectSubset<T, UserTimeIntervalCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserTimeIntervalPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserTimeInterval.
+     * @param {UserTimeIntervalDeleteArgs} args - Arguments to delete one UserTimeInterval.
+     * @example
+     * // Delete one UserTimeInterval
+     * const UserTimeInterval = await prisma.userTimeInterval.delete({
+     *   where: {
+     *     // ... filter to delete one UserTimeInterval
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserTimeIntervalDeleteArgs>(args: SelectSubset<T, UserTimeIntervalDeleteArgs<ExtArgs>>): Prisma__UserTimeIntervalClient<$Result.GetResult<Prisma.$UserTimeIntervalPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserTimeInterval.
+     * @param {UserTimeIntervalUpdateArgs} args - Arguments to update one UserTimeInterval.
+     * @example
+     * // Update one UserTimeInterval
+     * const userTimeInterval = await prisma.userTimeInterval.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserTimeIntervalUpdateArgs>(args: SelectSubset<T, UserTimeIntervalUpdateArgs<ExtArgs>>): Prisma__UserTimeIntervalClient<$Result.GetResult<Prisma.$UserTimeIntervalPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserTimeIntervals.
+     * @param {UserTimeIntervalDeleteManyArgs} args - Arguments to filter UserTimeIntervals to delete.
+     * @example
+     * // Delete a few UserTimeIntervals
+     * const { count } = await prisma.userTimeInterval.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserTimeIntervalDeleteManyArgs>(args?: SelectSubset<T, UserTimeIntervalDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserTimeIntervals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserTimeIntervalUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserTimeIntervals
+     * const userTimeInterval = await prisma.userTimeInterval.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserTimeIntervalUpdateManyArgs>(args: SelectSubset<T, UserTimeIntervalUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserTimeIntervals and returns the data updated in the database.
+     * @param {UserTimeIntervalUpdateManyAndReturnArgs} args - Arguments to update many UserTimeIntervals.
+     * @example
+     * // Update many UserTimeIntervals
+     * const userTimeInterval = await prisma.userTimeInterval.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserTimeIntervals and only return the `id`
+     * const userTimeIntervalWithIdOnly = await prisma.userTimeInterval.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserTimeIntervalUpdateManyAndReturnArgs>(args: SelectSubset<T, UserTimeIntervalUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserTimeIntervalPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserTimeInterval.
+     * @param {UserTimeIntervalUpsertArgs} args - Arguments to update or create a UserTimeInterval.
+     * @example
+     * // Update or create a UserTimeInterval
+     * const userTimeInterval = await prisma.userTimeInterval.upsert({
+     *   create: {
+     *     // ... data to create a UserTimeInterval
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserTimeInterval we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserTimeIntervalUpsertArgs>(args: SelectSubset<T, UserTimeIntervalUpsertArgs<ExtArgs>>): Prisma__UserTimeIntervalClient<$Result.GetResult<Prisma.$UserTimeIntervalPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserTimeIntervals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserTimeIntervalCountArgs} args - Arguments to filter UserTimeIntervals to count.
+     * @example
+     * // Count the number of UserTimeIntervals
+     * const count = await prisma.userTimeInterval.count({
+     *   where: {
+     *     // ... the filter for the UserTimeIntervals we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserTimeIntervalCountArgs>(
+      args?: Subset<T, UserTimeIntervalCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserTimeIntervalCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserTimeInterval.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserTimeIntervalAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserTimeIntervalAggregateArgs>(args: Subset<T, UserTimeIntervalAggregateArgs>): Prisma.PrismaPromise<GetUserTimeIntervalAggregateType<T>>
+
+    /**
+     * Group by UserTimeInterval.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserTimeIntervalGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserTimeIntervalGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserTimeIntervalGroupByArgs['orderBy'] }
+        : { orderBy?: UserTimeIntervalGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserTimeIntervalGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserTimeIntervalGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserTimeInterval model
+   */
+  readonly fields: UserTimeIntervalFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserTimeInterval.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserTimeIntervalClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserTimeInterval model
+   */
+  interface UserTimeIntervalFieldRefs {
+    readonly id: FieldRef<"UserTimeInterval", 'String'>
+    readonly week_day: FieldRef<"UserTimeInterval", 'Int'>
+    readonly time_start_in_minutes: FieldRef<"UserTimeInterval", 'Int'>
+    readonly time_end_in_minutes: FieldRef<"UserTimeInterval", 'Int'>
+    readonly user_id: FieldRef<"UserTimeInterval", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserTimeInterval findUnique
+   */
+  export type UserTimeIntervalFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTimeInterval
+     */
+    select?: UserTimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTimeInterval
+     */
+    omit?: UserTimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTimeIntervalInclude<ExtArgs> | null
+    /**
+     * Filter, which UserTimeInterval to fetch.
+     */
+    where: UserTimeIntervalWhereUniqueInput
+  }
+
+  /**
+   * UserTimeInterval findUniqueOrThrow
+   */
+  export type UserTimeIntervalFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTimeInterval
+     */
+    select?: UserTimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTimeInterval
+     */
+    omit?: UserTimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTimeIntervalInclude<ExtArgs> | null
+    /**
+     * Filter, which UserTimeInterval to fetch.
+     */
+    where: UserTimeIntervalWhereUniqueInput
+  }
+
+  /**
+   * UserTimeInterval findFirst
+   */
+  export type UserTimeIntervalFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTimeInterval
+     */
+    select?: UserTimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTimeInterval
+     */
+    omit?: UserTimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTimeIntervalInclude<ExtArgs> | null
+    /**
+     * Filter, which UserTimeInterval to fetch.
+     */
+    where?: UserTimeIntervalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserTimeIntervals to fetch.
+     */
+    orderBy?: UserTimeIntervalOrderByWithRelationInput | UserTimeIntervalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserTimeIntervals.
+     */
+    cursor?: UserTimeIntervalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserTimeIntervals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserTimeIntervals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserTimeIntervals.
+     */
+    distinct?: UserTimeIntervalScalarFieldEnum | UserTimeIntervalScalarFieldEnum[]
+  }
+
+  /**
+   * UserTimeInterval findFirstOrThrow
+   */
+  export type UserTimeIntervalFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTimeInterval
+     */
+    select?: UserTimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTimeInterval
+     */
+    omit?: UserTimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTimeIntervalInclude<ExtArgs> | null
+    /**
+     * Filter, which UserTimeInterval to fetch.
+     */
+    where?: UserTimeIntervalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserTimeIntervals to fetch.
+     */
+    orderBy?: UserTimeIntervalOrderByWithRelationInput | UserTimeIntervalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserTimeIntervals.
+     */
+    cursor?: UserTimeIntervalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserTimeIntervals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserTimeIntervals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserTimeIntervals.
+     */
+    distinct?: UserTimeIntervalScalarFieldEnum | UserTimeIntervalScalarFieldEnum[]
+  }
+
+  /**
+   * UserTimeInterval findMany
+   */
+  export type UserTimeIntervalFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTimeInterval
+     */
+    select?: UserTimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTimeInterval
+     */
+    omit?: UserTimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTimeIntervalInclude<ExtArgs> | null
+    /**
+     * Filter, which UserTimeIntervals to fetch.
+     */
+    where?: UserTimeIntervalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserTimeIntervals to fetch.
+     */
+    orderBy?: UserTimeIntervalOrderByWithRelationInput | UserTimeIntervalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserTimeIntervals.
+     */
+    cursor?: UserTimeIntervalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserTimeIntervals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserTimeIntervals.
+     */
+    skip?: number
+    distinct?: UserTimeIntervalScalarFieldEnum | UserTimeIntervalScalarFieldEnum[]
+  }
+
+  /**
+   * UserTimeInterval create
+   */
+  export type UserTimeIntervalCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTimeInterval
+     */
+    select?: UserTimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTimeInterval
+     */
+    omit?: UserTimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTimeIntervalInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserTimeInterval.
+     */
+    data: XOR<UserTimeIntervalCreateInput, UserTimeIntervalUncheckedCreateInput>
+  }
+
+  /**
+   * UserTimeInterval createMany
+   */
+  export type UserTimeIntervalCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserTimeIntervals.
+     */
+    data: UserTimeIntervalCreateManyInput | UserTimeIntervalCreateManyInput[]
+  }
+
+  /**
+   * UserTimeInterval createManyAndReturn
+   */
+  export type UserTimeIntervalCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTimeInterval
+     */
+    select?: UserTimeIntervalSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTimeInterval
+     */
+    omit?: UserTimeIntervalOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserTimeIntervals.
+     */
+    data: UserTimeIntervalCreateManyInput | UserTimeIntervalCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTimeIntervalIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserTimeInterval update
+   */
+  export type UserTimeIntervalUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTimeInterval
+     */
+    select?: UserTimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTimeInterval
+     */
+    omit?: UserTimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTimeIntervalInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserTimeInterval.
+     */
+    data: XOR<UserTimeIntervalUpdateInput, UserTimeIntervalUncheckedUpdateInput>
+    /**
+     * Choose, which UserTimeInterval to update.
+     */
+    where: UserTimeIntervalWhereUniqueInput
+  }
+
+  /**
+   * UserTimeInterval updateMany
+   */
+  export type UserTimeIntervalUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserTimeIntervals.
+     */
+    data: XOR<UserTimeIntervalUpdateManyMutationInput, UserTimeIntervalUncheckedUpdateManyInput>
+    /**
+     * Filter which UserTimeIntervals to update
+     */
+    where?: UserTimeIntervalWhereInput
+    /**
+     * Limit how many UserTimeIntervals to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserTimeInterval updateManyAndReturn
+   */
+  export type UserTimeIntervalUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTimeInterval
+     */
+    select?: UserTimeIntervalSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTimeInterval
+     */
+    omit?: UserTimeIntervalOmit<ExtArgs> | null
+    /**
+     * The data used to update UserTimeIntervals.
+     */
+    data: XOR<UserTimeIntervalUpdateManyMutationInput, UserTimeIntervalUncheckedUpdateManyInput>
+    /**
+     * Filter which UserTimeIntervals to update
+     */
+    where?: UserTimeIntervalWhereInput
+    /**
+     * Limit how many UserTimeIntervals to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTimeIntervalIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserTimeInterval upsert
+   */
+  export type UserTimeIntervalUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTimeInterval
+     */
+    select?: UserTimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTimeInterval
+     */
+    omit?: UserTimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTimeIntervalInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserTimeInterval to update in case it exists.
+     */
+    where: UserTimeIntervalWhereUniqueInput
+    /**
+     * In case the UserTimeInterval found by the `where` argument doesn't exist, create a new UserTimeInterval with this data.
+     */
+    create: XOR<UserTimeIntervalCreateInput, UserTimeIntervalUncheckedCreateInput>
+    /**
+     * In case the UserTimeInterval was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserTimeIntervalUpdateInput, UserTimeIntervalUncheckedUpdateInput>
+  }
+
+  /**
+   * UserTimeInterval delete
+   */
+  export type UserTimeIntervalDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTimeInterval
+     */
+    select?: UserTimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTimeInterval
+     */
+    omit?: UserTimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTimeIntervalInclude<ExtArgs> | null
+    /**
+     * Filter which UserTimeInterval to delete.
+     */
+    where: UserTimeIntervalWhereUniqueInput
+  }
+
+  /**
+   * UserTimeInterval deleteMany
+   */
+  export type UserTimeIntervalDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserTimeIntervals to delete
+     */
+    where?: UserTimeIntervalWhereInput
+    /**
+     * Limit how many UserTimeIntervals to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserTimeInterval without action
+   */
+  export type UserTimeIntervalDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTimeInterval
+     */
+    select?: UserTimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTimeInterval
+     */
+    omit?: UserTimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTimeIntervalInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -4472,6 +5698,17 @@ export namespace Prisma {
   };
 
   export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+
+
+  export const UserTimeIntervalScalarFieldEnum: {
+    id: 'id',
+    week_day: 'week_day',
+    time_start_in_minutes: 'time_start_in_minutes',
+    time_end_in_minutes: 'time_end_in_minutes',
+    user_id: 'user_id'
+  };
+
+  export type UserTimeIntervalScalarFieldEnum = (typeof UserTimeIntervalScalarFieldEnum)[keyof typeof UserTimeIntervalScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4538,6 +5775,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"User"> | Date | string
     account?: AccountListRelationFilter
     session?: SessionListRelationFilter
+    timeIntervals?: UserTimeIntervalListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -4549,6 +5787,7 @@ export namespace Prisma {
     created_at?: SortOrder
     account?: AccountOrderByRelationAggregateInput
     session?: SessionOrderByRelationAggregateInput
+    timeIntervals?: UserTimeIntervalOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -4563,6 +5802,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"User"> | Date | string
     account?: AccountListRelationFilter
     session?: SessionListRelationFilter
+    timeIntervals?: UserTimeIntervalListRelationFilter
   }, "id" | "username" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -4732,6 +5972,63 @@ export namespace Prisma {
     expires?: DateTimeWithAggregatesFilter<"Session"> | Date | string
   }
 
+  export type UserTimeIntervalWhereInput = {
+    AND?: UserTimeIntervalWhereInput | UserTimeIntervalWhereInput[]
+    OR?: UserTimeIntervalWhereInput[]
+    NOT?: UserTimeIntervalWhereInput | UserTimeIntervalWhereInput[]
+    id?: StringFilter<"UserTimeInterval"> | string
+    week_day?: IntFilter<"UserTimeInterval"> | number
+    time_start_in_minutes?: IntFilter<"UserTimeInterval"> | number
+    time_end_in_minutes?: IntFilter<"UserTimeInterval"> | number
+    user_id?: StringFilter<"UserTimeInterval"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type UserTimeIntervalOrderByWithRelationInput = {
+    id?: SortOrder
+    week_day?: SortOrder
+    time_start_in_minutes?: SortOrder
+    time_end_in_minutes?: SortOrder
+    user_id?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type UserTimeIntervalWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: UserTimeIntervalWhereInput | UserTimeIntervalWhereInput[]
+    OR?: UserTimeIntervalWhereInput[]
+    NOT?: UserTimeIntervalWhereInput | UserTimeIntervalWhereInput[]
+    week_day?: IntFilter<"UserTimeInterval"> | number
+    time_start_in_minutes?: IntFilter<"UserTimeInterval"> | number
+    time_end_in_minutes?: IntFilter<"UserTimeInterval"> | number
+    user_id?: StringFilter<"UserTimeInterval"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type UserTimeIntervalOrderByWithAggregationInput = {
+    id?: SortOrder
+    week_day?: SortOrder
+    time_start_in_minutes?: SortOrder
+    time_end_in_minutes?: SortOrder
+    user_id?: SortOrder
+    _count?: UserTimeIntervalCountOrderByAggregateInput
+    _avg?: UserTimeIntervalAvgOrderByAggregateInput
+    _max?: UserTimeIntervalMaxOrderByAggregateInput
+    _min?: UserTimeIntervalMinOrderByAggregateInput
+    _sum?: UserTimeIntervalSumOrderByAggregateInput
+  }
+
+  export type UserTimeIntervalScalarWhereWithAggregatesInput = {
+    AND?: UserTimeIntervalScalarWhereWithAggregatesInput | UserTimeIntervalScalarWhereWithAggregatesInput[]
+    OR?: UserTimeIntervalScalarWhereWithAggregatesInput[]
+    NOT?: UserTimeIntervalScalarWhereWithAggregatesInput | UserTimeIntervalScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UserTimeInterval"> | string
+    week_day?: IntWithAggregatesFilter<"UserTimeInterval"> | number
+    time_start_in_minutes?: IntWithAggregatesFilter<"UserTimeInterval"> | number
+    time_end_in_minutes?: IntWithAggregatesFilter<"UserTimeInterval"> | number
+    user_id?: StringWithAggregatesFilter<"UserTimeInterval"> | string
+  }
+
   export type UserCreateInput = {
     id?: string
     username: string
@@ -4741,6 +6038,7 @@ export namespace Prisma {
     created_at?: Date | string
     account?: AccountCreateNestedManyWithoutUserInput
     session?: SessionCreateNestedManyWithoutUserInput
+    timeIntervals?: UserTimeIntervalCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -4752,6 +6050,7 @@ export namespace Prisma {
     created_at?: Date | string
     account?: AccountUncheckedCreateNestedManyWithoutUserInput
     session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    timeIntervals?: UserTimeIntervalUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -4763,6 +6062,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     account?: AccountUpdateManyWithoutUserNestedInput
     session?: SessionUpdateManyWithoutUserNestedInput
+    timeIntervals?: UserTimeIntervalUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -4774,6 +6074,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     account?: AccountUncheckedUpdateManyWithoutUserNestedInput
     session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    timeIntervals?: UserTimeIntervalUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -4955,6 +6256,61 @@ export namespace Prisma {
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserTimeIntervalCreateInput = {
+    id?: string
+    week_day: number
+    time_start_in_minutes: number
+    time_end_in_minutes: number
+    user: UserCreateNestedOneWithoutTimeIntervalsInput
+  }
+
+  export type UserTimeIntervalUncheckedCreateInput = {
+    id?: string
+    week_day: number
+    time_start_in_minutes: number
+    time_end_in_minutes: number
+    user_id: string
+  }
+
+  export type UserTimeIntervalUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    week_day?: IntFieldUpdateOperationsInput | number
+    time_start_in_minutes?: IntFieldUpdateOperationsInput | number
+    time_end_in_minutes?: IntFieldUpdateOperationsInput | number
+    user?: UserUpdateOneRequiredWithoutTimeIntervalsNestedInput
+  }
+
+  export type UserTimeIntervalUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    week_day?: IntFieldUpdateOperationsInput | number
+    time_start_in_minutes?: IntFieldUpdateOperationsInput | number
+    time_end_in_minutes?: IntFieldUpdateOperationsInput | number
+    user_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserTimeIntervalCreateManyInput = {
+    id?: string
+    week_day: number
+    time_start_in_minutes: number
+    time_end_in_minutes: number
+    user_id: string
+  }
+
+  export type UserTimeIntervalUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    week_day?: IntFieldUpdateOperationsInput | number
+    time_start_in_minutes?: IntFieldUpdateOperationsInput | number
+    time_end_in_minutes?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type UserTimeIntervalUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    week_day?: IntFieldUpdateOperationsInput | number
+    time_start_in_minutes?: IntFieldUpdateOperationsInput | number
+    time_end_in_minutes?: IntFieldUpdateOperationsInput | number
+    user_id?: StringFieldUpdateOperationsInput | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -5006,6 +6362,12 @@ export namespace Prisma {
     none?: SessionWhereInput
   }
 
+  export type UserTimeIntervalListRelationFilter = {
+    every?: UserTimeIntervalWhereInput
+    some?: UserTimeIntervalWhereInput
+    none?: UserTimeIntervalWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -5016,6 +6378,10 @@ export namespace Prisma {
   }
 
   export type SessionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserTimeIntervalOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -5205,6 +6571,69 @@ export namespace Prisma {
     expires?: SortOrder
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type UserTimeIntervalCountOrderByAggregateInput = {
+    id?: SortOrder
+    week_day?: SortOrder
+    time_start_in_minutes?: SortOrder
+    time_end_in_minutes?: SortOrder
+    user_id?: SortOrder
+  }
+
+  export type UserTimeIntervalAvgOrderByAggregateInput = {
+    week_day?: SortOrder
+    time_start_in_minutes?: SortOrder
+    time_end_in_minutes?: SortOrder
+  }
+
+  export type UserTimeIntervalMaxOrderByAggregateInput = {
+    id?: SortOrder
+    week_day?: SortOrder
+    time_start_in_minutes?: SortOrder
+    time_end_in_minutes?: SortOrder
+    user_id?: SortOrder
+  }
+
+  export type UserTimeIntervalMinOrderByAggregateInput = {
+    id?: SortOrder
+    week_day?: SortOrder
+    time_start_in_minutes?: SortOrder
+    time_end_in_minutes?: SortOrder
+    user_id?: SortOrder
+  }
+
+  export type UserTimeIntervalSumOrderByAggregateInput = {
+    week_day?: SortOrder
+    time_start_in_minutes?: SortOrder
+    time_end_in_minutes?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type AccountCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -5219,6 +6648,13 @@ export namespace Prisma {
     connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
+  export type UserTimeIntervalCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserTimeIntervalCreateWithoutUserInput, UserTimeIntervalUncheckedCreateWithoutUserInput> | UserTimeIntervalCreateWithoutUserInput[] | UserTimeIntervalUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserTimeIntervalCreateOrConnectWithoutUserInput | UserTimeIntervalCreateOrConnectWithoutUserInput[]
+    createMany?: UserTimeIntervalCreateManyUserInputEnvelope
+    connect?: UserTimeIntervalWhereUniqueInput | UserTimeIntervalWhereUniqueInput[]
+  }
+
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -5231,6 +6667,13 @@ export namespace Prisma {
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
     createMany?: SessionCreateManyUserInputEnvelope
     connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+  }
+
+  export type UserTimeIntervalUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserTimeIntervalCreateWithoutUserInput, UserTimeIntervalUncheckedCreateWithoutUserInput> | UserTimeIntervalCreateWithoutUserInput[] | UserTimeIntervalUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserTimeIntervalCreateOrConnectWithoutUserInput | UserTimeIntervalCreateOrConnectWithoutUserInput[]
+    createMany?: UserTimeIntervalCreateManyUserInputEnvelope
+    connect?: UserTimeIntervalWhereUniqueInput | UserTimeIntervalWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -5273,6 +6716,20 @@ export namespace Prisma {
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
+  export type UserTimeIntervalUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserTimeIntervalCreateWithoutUserInput, UserTimeIntervalUncheckedCreateWithoutUserInput> | UserTimeIntervalCreateWithoutUserInput[] | UserTimeIntervalUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserTimeIntervalCreateOrConnectWithoutUserInput | UserTimeIntervalCreateOrConnectWithoutUserInput[]
+    upsert?: UserTimeIntervalUpsertWithWhereUniqueWithoutUserInput | UserTimeIntervalUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserTimeIntervalCreateManyUserInputEnvelope
+    set?: UserTimeIntervalWhereUniqueInput | UserTimeIntervalWhereUniqueInput[]
+    disconnect?: UserTimeIntervalWhereUniqueInput | UserTimeIntervalWhereUniqueInput[]
+    delete?: UserTimeIntervalWhereUniqueInput | UserTimeIntervalWhereUniqueInput[]
+    connect?: UserTimeIntervalWhereUniqueInput | UserTimeIntervalWhereUniqueInput[]
+    update?: UserTimeIntervalUpdateWithWhereUniqueWithoutUserInput | UserTimeIntervalUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserTimeIntervalUpdateManyWithWhereWithoutUserInput | UserTimeIntervalUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserTimeIntervalScalarWhereInput | UserTimeIntervalScalarWhereInput[]
+  }
+
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -5299,6 +6756,20 @@ export namespace Prisma {
     update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
+  }
+
+  export type UserTimeIntervalUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserTimeIntervalCreateWithoutUserInput, UserTimeIntervalUncheckedCreateWithoutUserInput> | UserTimeIntervalCreateWithoutUserInput[] | UserTimeIntervalUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserTimeIntervalCreateOrConnectWithoutUserInput | UserTimeIntervalCreateOrConnectWithoutUserInput[]
+    upsert?: UserTimeIntervalUpsertWithWhereUniqueWithoutUserInput | UserTimeIntervalUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserTimeIntervalCreateManyUserInputEnvelope
+    set?: UserTimeIntervalWhereUniqueInput | UserTimeIntervalWhereUniqueInput[]
+    disconnect?: UserTimeIntervalWhereUniqueInput | UserTimeIntervalWhereUniqueInput[]
+    delete?: UserTimeIntervalWhereUniqueInput | UserTimeIntervalWhereUniqueInput[]
+    connect?: UserTimeIntervalWhereUniqueInput | UserTimeIntervalWhereUniqueInput[]
+    update?: UserTimeIntervalUpdateWithWhereUniqueWithoutUserInput | UserTimeIntervalUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserTimeIntervalUpdateManyWithWhereWithoutUserInput | UserTimeIntervalUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserTimeIntervalScalarWhereInput | UserTimeIntervalScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutAccountInput = {
@@ -5335,6 +6806,28 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutSessionInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSessionInput, UserUpdateWithoutSessionInput>, UserUncheckedUpdateWithoutSessionInput>
+  }
+
+  export type UserCreateNestedOneWithoutTimeIntervalsInput = {
+    create?: XOR<UserCreateWithoutTimeIntervalsInput, UserUncheckedCreateWithoutTimeIntervalsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTimeIntervalsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type UserUpdateOneRequiredWithoutTimeIntervalsNestedInput = {
+    create?: XOR<UserCreateWithoutTimeIntervalsInput, UserUncheckedCreateWithoutTimeIntervalsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTimeIntervalsInput
+    upsert?: UserUpsertWithoutTimeIntervalsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTimeIntervalsInput, UserUpdateWithoutTimeIntervalsInput>, UserUncheckedUpdateWithoutTimeIntervalsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -5473,6 +6966,33 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type AccountCreateWithoutUserInput = {
     id?: string
     type: string
@@ -5529,6 +7049,29 @@ export namespace Prisma {
 
   export type SessionCreateManyUserInputEnvelope = {
     data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
+  }
+
+  export type UserTimeIntervalCreateWithoutUserInput = {
+    id?: string
+    week_day: number
+    time_start_in_minutes: number
+    time_end_in_minutes: number
+  }
+
+  export type UserTimeIntervalUncheckedCreateWithoutUserInput = {
+    id?: string
+    week_day: number
+    time_start_in_minutes: number
+    time_end_in_minutes: number
+  }
+
+  export type UserTimeIntervalCreateOrConnectWithoutUserInput = {
+    where: UserTimeIntervalWhereUniqueInput
+    create: XOR<UserTimeIntervalCreateWithoutUserInput, UserTimeIntervalUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserTimeIntervalCreateManyUserInputEnvelope = {
+    data: UserTimeIntervalCreateManyUserInput | UserTimeIntervalCreateManyUserInput[]
   }
 
   export type AccountUpsertWithWhereUniqueWithoutUserInput = {
@@ -5591,6 +7134,33 @@ export namespace Prisma {
     expires?: DateTimeFilter<"Session"> | Date | string
   }
 
+  export type UserTimeIntervalUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserTimeIntervalWhereUniqueInput
+    update: XOR<UserTimeIntervalUpdateWithoutUserInput, UserTimeIntervalUncheckedUpdateWithoutUserInput>
+    create: XOR<UserTimeIntervalCreateWithoutUserInput, UserTimeIntervalUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserTimeIntervalUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserTimeIntervalWhereUniqueInput
+    data: XOR<UserTimeIntervalUpdateWithoutUserInput, UserTimeIntervalUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserTimeIntervalUpdateManyWithWhereWithoutUserInput = {
+    where: UserTimeIntervalScalarWhereInput
+    data: XOR<UserTimeIntervalUpdateManyMutationInput, UserTimeIntervalUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserTimeIntervalScalarWhereInput = {
+    AND?: UserTimeIntervalScalarWhereInput | UserTimeIntervalScalarWhereInput[]
+    OR?: UserTimeIntervalScalarWhereInput[]
+    NOT?: UserTimeIntervalScalarWhereInput | UserTimeIntervalScalarWhereInput[]
+    id?: StringFilter<"UserTimeInterval"> | string
+    week_day?: IntFilter<"UserTimeInterval"> | number
+    time_start_in_minutes?: IntFilter<"UserTimeInterval"> | number
+    time_end_in_minutes?: IntFilter<"UserTimeInterval"> | number
+    user_id?: StringFilter<"UserTimeInterval"> | string
+  }
+
   export type UserCreateWithoutAccountInput = {
     id?: string
     username: string
@@ -5599,6 +7169,7 @@ export namespace Prisma {
     avatar_url?: string | null
     created_at?: Date | string
     session?: SessionCreateNestedManyWithoutUserInput
+    timeIntervals?: UserTimeIntervalCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountInput = {
@@ -5609,6 +7180,7 @@ export namespace Prisma {
     avatar_url?: string | null
     created_at?: Date | string
     session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    timeIntervals?: UserTimeIntervalUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountInput = {
@@ -5635,6 +7207,7 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     session?: SessionUpdateManyWithoutUserNestedInput
+    timeIntervals?: UserTimeIntervalUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountInput = {
@@ -5645,6 +7218,7 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    timeIntervals?: UserTimeIntervalUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionInput = {
@@ -5655,6 +7229,7 @@ export namespace Prisma {
     avatar_url?: string | null
     created_at?: Date | string
     account?: AccountCreateNestedManyWithoutUserInput
+    timeIntervals?: UserTimeIntervalCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionInput = {
@@ -5665,6 +7240,7 @@ export namespace Prisma {
     avatar_url?: string | null
     created_at?: Date | string
     account?: AccountUncheckedCreateNestedManyWithoutUserInput
+    timeIntervals?: UserTimeIntervalUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionInput = {
@@ -5691,6 +7267,7 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     account?: AccountUpdateManyWithoutUserNestedInput
+    timeIntervals?: UserTimeIntervalUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionInput = {
@@ -5701,6 +7278,67 @@ export namespace Prisma {
     avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     account?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    timeIntervals?: UserTimeIntervalUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutTimeIntervalsInput = {
+    id?: string
+    username: string
+    name: string
+    email?: string | null
+    avatar_url?: string | null
+    created_at?: Date | string
+    account?: AccountCreateNestedManyWithoutUserInput
+    session?: SessionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutTimeIntervalsInput = {
+    id?: string
+    username: string
+    name: string
+    email?: string | null
+    avatar_url?: string | null
+    created_at?: Date | string
+    account?: AccountUncheckedCreateNestedManyWithoutUserInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutTimeIntervalsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutTimeIntervalsInput, UserUncheckedCreateWithoutTimeIntervalsInput>
+  }
+
+  export type UserUpsertWithoutTimeIntervalsInput = {
+    update: XOR<UserUpdateWithoutTimeIntervalsInput, UserUncheckedUpdateWithoutTimeIntervalsInput>
+    create: XOR<UserCreateWithoutTimeIntervalsInput, UserUncheckedCreateWithoutTimeIntervalsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutTimeIntervalsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutTimeIntervalsInput, UserUncheckedUpdateWithoutTimeIntervalsInput>
+  }
+
+  export type UserUpdateWithoutTimeIntervalsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    account?: AccountUpdateManyWithoutUserNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutTimeIntervalsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    account?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AccountCreateManyUserInput = {
@@ -5721,6 +7359,13 @@ export namespace Prisma {
     id?: string
     session_token: string
     expires: Date | string
+  }
+
+  export type UserTimeIntervalCreateManyUserInput = {
+    id?: string
+    week_day: number
+    time_start_in_minutes: number
+    time_end_in_minutes: number
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -5781,6 +7426,27 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     session_token?: StringFieldUpdateOperationsInput | string
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserTimeIntervalUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    week_day?: IntFieldUpdateOperationsInput | number
+    time_start_in_minutes?: IntFieldUpdateOperationsInput | number
+    time_end_in_minutes?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type UserTimeIntervalUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    week_day?: IntFieldUpdateOperationsInput | number
+    time_start_in_minutes?: IntFieldUpdateOperationsInput | number
+    time_end_in_minutes?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type UserTimeIntervalUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    week_day?: IntFieldUpdateOperationsInput | number
+    time_start_in_minutes?: IntFieldUpdateOperationsInput | number
+    time_end_in_minutes?: IntFieldUpdateOperationsInput | number
   }
 
 
