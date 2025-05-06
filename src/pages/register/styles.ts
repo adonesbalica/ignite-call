@@ -33,5 +33,5 @@ export const Header = styled('div', {
 })
 
 export const FormError = styled(Text, {
-  color: '#f75a68',
+  color: '#F75A68',
 })
