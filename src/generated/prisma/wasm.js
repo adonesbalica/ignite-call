@@ -154,6 +154,16 @@ exports.Prisma.UserTimeIntervalScalarFieldEnum = {
   user_id: 'user_id'
 };
 
+exports.Prisma.SchedulingScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  name: 'name',
+  email: 'email',
+  obervations: 'obervations',
+  created_at: 'created_at',
+  user_id: 'user_id'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -169,7 +179,8 @@ exports.Prisma.ModelName = {
   User: 'User',
   Account: 'Account',
   Session: 'Session',
-  UserTimeInterval: 'UserTimeInterval'
+  UserTimeInterval: 'UserTimeInterval',
+  Scheduling: 'Scheduling'
 };
 
 /**
